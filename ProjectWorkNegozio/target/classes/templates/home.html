@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Home</title>
+	<link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+
+<body>
+	<h2>Home</h2><br />
+	<h4>Ciao <span th:text="${utente.username}"></span>!</h4>
+
+	<a th:href="@{/visualizzaProdotti}">
+		<h4>Visualizza Prodotti</h4>
+	</a>
+
+	<a th:href="@{/visualizzaCarrello}">
+		<h4>Visualizza Carrello</h4>
+	</a>
+</body>
+
+</html>

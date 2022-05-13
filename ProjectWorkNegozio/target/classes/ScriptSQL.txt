@@ -1,0 +1,144 @@
+CREATE DATABASE ecommerce
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    CONNECTION LIMIT = -1;
+
+GRANT ALL ON DATABASE ecommerce TO postgres;
+
+
+
+-- Table: public.utente
+
+-- DROP TABLE IF EXISTS public.utente;
+
+CREATE TABLE IF NOT EXISTS public.utente
+(
+    username character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    password character varying(10) COLLATE pg_catalog."default" NOT NULL,
+    role character varying(5) COLLATE pg_catalog."default" NOT NULL
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.utente
+    OWNER to postgres;
+	
+	
+
+-- Table: public.prodotto
+
+-- DROP TABLE IF EXISTS public.prodotto;
+
+CREATE TABLE IF NOT EXISTS public.prodotto
+(
+    id_prodotto numeric(10,0) NOT NULL,
+    nome_prodotto character varying(50) COLLATE pg_catalog."default" NOT NULL,
+    descrizione_prodotto character varying(50) COLLATE pg_catalog."default",
+    prezzo_prodotto numeric(10,0) NOT NULL,
+    CONSTRAINT prodotto_pkey PRIMARY KEY (id_prodotto)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.prodotto
+    OWNER to postgres;
+
+GRANT ALL ON TABLE public.prodotto TO postgres;
+
+
+
+
+-- Table: public.carrello
+
+-- DROP TABLE IF EXISTS public.carrello;
+
+CREATE TABLE IF NOT EXISTS public.carrello
+(
+    cod_carrello integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    cod_utente integer NOT NULL,
+    cod_prodotto integer NOT NULL,
+    quantita integer NOT NULL,
+    CONSTRAINT carello_pkey PRIMARY KEY (cod_carrello),
+    CONSTRAINT pk_prodotto FOREIGN KEY (cod_carrello)
+        REFERENCES public.prodotto (id_prodotto) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.carrello
+    OWNER to postgres;
+
+GRANT ALL ON TABLE public.carrello TO postgres;
+
+--Popolamento DB TABELLA PRODOTTI
+
+INSERT INTO public.prodotto(
+	id_prodotto, nome_prodotto, descrizione_prodotto, prezzo_prodotto)
+	VALUES (1, 'samsung galaxy s22' , 'smartphone samsung', 879);
+	
+	INSERT INTO public.prodotto(
+	id_prodotto, nome_prodotto, descrizione_prodotto, prezzo_prodotto)
+	VALUES (2, 'xiaomi redmi note11 ' , 'smartphone xiaomi', 188);
+	
+	INSERT INTO public.prodotto(
+	id_prodotto, nome_prodotto, descrizione_prodotto, prezzo_prodotto)
+	VALUES (3, 'realme 7 5G' , 'smartphone realme', 457);
+	
+	INSERT INTO public.prodotto(
+	id_prodotto, nome_prodotto, descrizione_prodotto, prezzo_prodotto)
+	VALUES (4, 'iphone 13 pro' , 'smartphone apple', 1269);
+	
+	INSERT INTO public.prodotto(
+	id_prodotto, nome_prodotto, descrizione_prodotto, prezzo_prodotto)
+	VALUES (5, 'huawei p40 lite 5g' , 'smartphone huawei', 356);
+	
+	INSERT INTO public.prodotto(
+	id_prodotto, nome_prodotto, descrizione_prodotto, prezzo_prodotto)
+	VALUES (6, 'nokia 3310' , 'smartphone nokia', 73);
+	
+	INSERT INTO public.prodotto(
+	id_prodotto, nome_prodotto, descrizione_prodotto, prezzo_prodotto)
+	VALUES (7, 'nokia g20' , 'smartphone nokia', 161);
+	
+	INSERT INTO public.prodotto(
+	id_prodotto, nome_prodotto, descrizione_prodotto, prezzo_prodotto)
+	VALUES (8, 'xiaomi mi smart tv p1' , 'tv xiaomi', 179);
+	
+	INSERT INTO public.prodotto(
+	id_prodotto, nome_prodotto, descrizione_prodotto, prezzo_prodotto)
+	VALUES (9, 'samsung tv qled' , 'tv samsung', 499);
+	
+	INSERT INTO public.prodotto(
+	id_prodotto, nome_prodotto, descrizione_prodotto, prezzo_prodotto)
+	VALUES (10, 'lg smart tv 4k' , 'tv lg', 799);
+	
+	INSERT INTO public.prodotto(
+	id_prodotto, nome_prodotto, descrizione_prodotto, prezzo_prodotto)
+	VALUES (11, 'panasonic smart tv 4k' , 'tv panasonic', 678);
+	
+	INSERT INTO public.prodotto(
+	id_prodotto, nome_prodotto, descrizione_prodotto, prezzo_prodotto)
+	VALUES (12, 'sharp aquos' , 'tv sharp', 600);
+	
+	INSERT INTO public.prodotto(
+	id_prodotto, nome_prodotto, descrizione_prodotto, prezzo_prodotto)
+	VALUES (13, 'hisense qled 4k' , 'tv hisense', 419);
+	
+	INSERT INTO public.prodotto(
+	id_prodotto, nome_prodotto, descrizione_prodotto, prezzo_prodotto)
+	VALUES (14, 'sony bravia 4k' , 'tv sony', 549);
+	
+	
+-- Popolamento DB Tabella UTENTI
+
+INSERT INTO public.utente(
+	username, password, id_utente, role)
+	VALUES ('pippo92', 4567, 2, false);
+	
+	INSERT INTO public.utente(
+	username, password, id_utente, role)
+	VALUES ('majk1992', 1234, 1, true);

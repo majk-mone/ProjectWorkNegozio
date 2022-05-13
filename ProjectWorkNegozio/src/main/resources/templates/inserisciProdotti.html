@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Prodotti</title>
+	<link rel="stylesheet" th:href="@{/styles.css}" />
+</head>
+
+<body>
+	<div id="global">
+		<h3>Inserisci Prodotto</h3>
+		<form method="POST" th:action="@{/inserisciProdotti}" th:object="${prodotto}">
+			<fieldset>
+				<legend>Inserisci un Prodotto</legend>
+				<p>
+					<label for="nome">Nome:</label>
+					<input type="text" name="nome" th:field="*{nome}"><br />
+					<span class="validationError" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span><br />
+				</p>
+				<p>
+					<label for="descrizione">Descrizione:</label>
+					<input type="text" name="descrizione" th:field="*{descrizione}"><br />
+					<span class="validationError" th:if="${#fields.hasErrors('descrizione')}"
+						th:errors="*{descrizione}"></span><br />
+				</p>
+				<p>
+					<label for="prezzo">Prezzo:</label>
+					<input type="text" name="prezzo" th:field="*{prezzo}"><br />
+					<span class="validationError" th:if="${#fields.hasErrors('prezzo')}"
+						th:errors="*{prezzo}"></span><br />
+				</p>
+				<p id="buttons">
+					<input id="reset" type="reset" value="Pulisci">
+					<input id="submit" type="submit" value="Inserisci">
+				</p>
+			</fieldset>
+		</form>
+		<div class="center"><a th:href="@{/visualizzaProdotti}">Visualizza prodotti</a></div>
+		<div class="center"><a th:href="@{/admin}">Pagina Admin</a></div>
+	</div>
+</body>
+
+</html>
